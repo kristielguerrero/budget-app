@@ -10,3 +10,11 @@ var infoToCatch = [
 
 var CACHE_NAME = "budget-cache-v1";
 var DATA_CACHE_NAME = "data-cache-v1";
+
+self.addEventListener("install", (event) => {
+  event.waitUnti(
+    cahces.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(infoToCatch);
+    })
+  );
+});
