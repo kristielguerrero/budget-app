@@ -47,3 +47,12 @@ self.addEventListener("fetch", (event) => {
       );
       return;
     }
+    event.respondWith(
+        fetch(event.request).cache(() => {
+            return chache.match(event.request).then((respond) => {
+                if (response) {
+                    return response;
+                }
+            })
+        })
+    )
