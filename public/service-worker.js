@@ -18,3 +18,9 @@ self.addEventListener("install", (event) => {
     })
   );
 });
+
+
+//fetch 
+
+self.addEventListener("fetch", (event) => {
+    if (event.request.url.includes("/api")) {}
