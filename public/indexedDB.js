@@ -13,6 +13,7 @@ request.onerror = function (e) {
   console.log(`Whoops! ${e.target.errorCode}`);
 };
 
+// if database is online, saved records will be uploaded
 function checkDatabase() {
   let transaction = db.transaction("transaction pending", "readwrite");
   const store = transaction.objectStore("transaction pending");
@@ -60,5 +61,5 @@ const saveRecord = (record) => {
   );
 };
 
-// listen for app coming back online
+// listening for app to come back online
 window.addEventListener("online", checkDatabase);
