@@ -11,6 +11,11 @@ request.onerror = function (e) {
   db.createObjectStore("transaction pending", { autoIncrement: true });
 };
 
+function checkDatabase() {
+    const transaction = 
+    const store = 
+    const getAll = 
+}
 // Checking if online before reading database
 request.onsuccess = function (e) {
   db = e.target.result;
