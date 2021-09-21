@@ -15,6 +15,7 @@ function checkDatabase() {
   const store = transaction.objectStore("transaction pending");
   const getAll = store.getAll();
 }
+
 // Checking if online before reading database
 request.onsuccess = function (e) {
   db = e.target.result;
@@ -22,6 +23,13 @@ request.onsuccess = function (e) {
   if (navigator.onLine) {
     checkDatabase();
   }
+};
+
+// Creating transaction in db, accessing object store, and adding record
+const saveRecord = (record) => {
+  const transaction = db.transaction("pending", "readwrite");
+  const store = transaction.objectStore("pending");
+  store.add(record);
 };
 
 // listen for app coming back online
