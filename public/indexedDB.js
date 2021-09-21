@@ -16,6 +16,8 @@ function checkDatabase() {
   const getAll = store.getAll();
 }
 
+getAll.onsuccess = function () {};
+
 // Checking if online before reading database
 request.onsuccess = function (e) {
   db = e.target.result;
