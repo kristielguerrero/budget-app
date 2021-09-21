@@ -30,6 +30,9 @@ const saveRecord = (record) => {
   const transaction = db.transaction("pending", "readwrite");
   const store = transaction.objectStore("pending");
   store.add(record);
+  console.log(
+    "Offline at the moment; transaction will be updated once you are back online"
+  );
 };
 
 // listen for app coming back online
