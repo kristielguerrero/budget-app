@@ -6,7 +6,14 @@ request.onupgradeneeded = function (e) {
   db.createObjectStore("pending", { autoIncrement: true });
 };
 
-request.onsuccess = function (e) {};
+// Checking if online before reading database
+request.onsuccess = function (e) {
+  db = e.target.result;
+  console.log("Success!");
+  if (navigator.onLine) {
+    checkDatabase();
+  }
+};
 
 // listen for app coming back online
 window.addEventListener("online", checkDatabase);
