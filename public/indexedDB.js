@@ -1,3 +1,6 @@
+const { response } = require("express");
+const { get } = require("mongoose");
+
 let db;
 const request = indexedDB.open("budget", 1);
 
@@ -17,15 +20,25 @@ function checkDatabase() {
 }
 
 getAll.onsuccess = function () {
-    if () { 
-        fetch("/api/transaction/bulk", {
-            method: "POST", 
-            body: JSON.stringify(getAll.result),
-            headers: {
-                Accept: 
-            }
-        })
-    }
+  if (getAll.result.length > 0) {
+    fetch("/api/transaction/bulk", {
+      method: "POST",
+      body: JSON.stringify(getAll.result),
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then(() => {
+        if (res.length !== 0) {
+          transaction = db.transaction(["BudgetStore"], "readwrite");
+          const currentStore = transaction.objectStore("BudgetStore");
+          currentStore.clear();
+          console.log("Offline transactions have been stored!");
+        }
+      });
+  }
 };
 
 // Checking if online before reading database
