@@ -16,7 +16,17 @@ function checkDatabase() {
   const getAll = store.getAll();
 }
 
-getAll.onsuccess = function () {};
+getAll.onsuccess = function () {
+    if () { 
+        fetch("/api/transaction/bulk", {
+            method:
+            body: 
+            headers: {
+                Accept: 
+            }
+        })
+    }
+};
 
 // Checking if online before reading database
 request.onsuccess = function (e) {
