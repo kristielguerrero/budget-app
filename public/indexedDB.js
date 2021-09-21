@@ -6,5 +6,7 @@ request.onupgradeneeded = function (e) {
   db.createObjectStore("pending", { autoIncrement: true });
 };
 
+request.onsuccess = function (e) {};
+
 // listen for app coming back online
 window.addEventListener("online", checkDatabase);
