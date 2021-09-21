@@ -12,9 +12,9 @@ request.onerror = function (e) {
 };
 
 function checkDatabase() {
-    const transaction = 
-    const store = 
-    const getAll = 
+  let transaction = db.transaction("transaction pending", "readwrite");
+  const store = transaction.objectStore("transaction pending");
+  const getAll = store.getAll();
 }
 // Checking if online before reading database
 request.onsuccess = function (e) {
