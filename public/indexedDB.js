@@ -19,8 +19,8 @@ function checkDatabase() {
 getAll.onsuccess = function () {
     if () { 
         fetch("/api/transaction/bulk", {
-            method:
-            body: 
+            method: "POST", 
+            body: JSON.stringify(getAll.result),
             headers: {
                 Accept: 
             }
