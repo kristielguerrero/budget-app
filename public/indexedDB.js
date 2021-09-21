@@ -6,6 +6,11 @@ request.onupgradeneeded = function (e) {
   db.createObjectStore("pending", { autoIncrement: true });
 };
 
+request.onerror = function (e) {
+  const db = e.target.result;
+  db.createObjectStore("transaction pending", { autoIncrement: true });
+};
+
 // Checking if online before reading database
 request.onsuccess = function (e) {
   db = e.target.result;
