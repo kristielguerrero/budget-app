@@ -7,8 +7,7 @@ request.onupgradeneeded = function (e) {
 };
 
 request.onerror = function (e) {
-  const db = e.target.result;
-  db.createObjectStore("transaction pending", { autoIncrement: true });
+  console.log(`Whoops! ${e.target.errorCode}`);
 };
 
 function checkDatabase() {
