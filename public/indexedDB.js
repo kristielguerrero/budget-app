@@ -9,8 +9,27 @@ request.onupgradeneeded = function (e) {
   db.createObjectStore("pending", { autoIncrement: true });
 };
 
+// Checking if online before reading database
+request.onsuccess = function (e) {
+  db = e.target.result;
+  console.log("Success!");
+  if (navigator.onLine) {
+    checkDatabase();
+  }
+};
+
 request.onerror = function (e) {
   console.log(`Whoops! ${e.target.errorCode}`);
+};
+
+// Creating transaction in db, accessing object store, and adding record
+const saveRecord = (record) => {
+  const transaction = db.transaction(["transaction"], "readwrite");
+  const store = transaction.objectStore("transaction");
+  store.add(record);
+  console.log(
+    "Offline at the moment; transaction will be updated once you are back online"
+  );
 };
 
 // if database is online, saved records will be uploaded
@@ -40,25 +59,6 @@ getAll.onsuccess = function () {
         }
       });
   }
-};
-
-// Checking if online before reading database
-request.onsuccess = function (e) {
-  db = e.target.result;
-  console.log("Success!");
-  if (navigator.onLine) {
-    checkDatabase();
-  }
-};
-
-// Creating transaction in db, accessing object store, and adding record
-const saveRecord = (record) => {
-  const transaction = db.transaction("pending", "readwrite");
-  const store = transaction.objectStore("pending");
-  store.add(record);
-  console.log(
-    "Offline at the moment; transaction will be updated once you are back online"
-  );
 };
 
 // listening for app to come back online
