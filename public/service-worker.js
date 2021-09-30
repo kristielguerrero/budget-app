@@ -1,6 +1,6 @@
 const { response } = require("express");
 
-var infoToCatch = [
+var infoToCache = [
   "/",
   "/index.js",
   "index.html",
@@ -13,12 +13,14 @@ var infoToCatch = [
 var CACHE_NAME = "budget-cache-v1";
 var DATA_CACHE_NAME = "data-cache-v1";
 
+// install
 self.addEventListener("install", (event) => {
   event.waitUnti(
     cahces.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(infoToCatch);
+      return cache.addAll(infoToCache);
     })
   );
+  self.skipWaiting();
 });
 
 //fetch
