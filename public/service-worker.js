@@ -23,6 +23,22 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
+self.addEventListener("activate", function (event) {
+  event.watiUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((key) => {
+          if (key !== CACHE_NAME && KEY !== DATA_CACHE_NAME) {
+            console.log("Deleting old cache data", key);
+            return caches.delete(key);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
+});
+
 //fetch
 
 self.addEventListener("fetch", (event) => {
